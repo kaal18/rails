@@ -23,7 +23,7 @@ jobs:
       - run: gem install --user-install bundler-audit
       - run: export PATH="~/.gem/ruby/2.6.0/bin/:$PATH"
       - run: bundle-audit check --format json --output bundle-audit-output.json
-      - uses: actions/upload-artifacts@v4
+      - uses: actions/upload-artifact@v4
         name: "Upload bundler-audit artifact"
         with:
           path: bundle-audit-output.json
