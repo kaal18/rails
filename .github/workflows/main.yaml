@@ -17,7 +17,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
-      - run: docker run --rm -v ${{ github.workspace }}:/workspace -w /workspace hysnsec/bundle-audit check --format json --output /workspace/bundle-audit.json
+      - uses: andrewmcodes/bundler-audit-action@v0.1.0
+      - run: bundle-audit check --format json --output bundle-audit.json
       - uses: actions/upload-artifact@v4
         name: "Upload bundler-audit artifact"
         with:
