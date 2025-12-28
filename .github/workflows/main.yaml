@@ -20,7 +20,7 @@ jobs:
         with:
           ruby-version: 2.6.5
       - uses: actions/checkout@v2
-      - run: gem install --user-install bundler-audit
+      - run: gem install bundler-audit
       - run: export PATH="~/.gem/ruby/2.6.0/bin/:$PATH"
       - run: bundle-audit check --format json --output bundle-audit-output.json
       - uses: actions/upload-artifact@v4
