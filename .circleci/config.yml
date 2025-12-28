@@ -11,7 +11,7 @@ jobs:
       - image: hysnsec/bundle-audit
     steps:
       - checkout
-      - run: check --format json --output bundle-audit.json
+      - run: bundle-audit check --format json --output bundle-audit.json
       - store_artifacts:
           path: bundle-audit.json
           when: always
