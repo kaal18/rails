@@ -17,11 +17,11 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
-      - run: docker run --rm -v $(pwd)/src -w /src hysnsec/bundle-audit check --format json --output /src/bundle-audit.json
+      - run: docker run --rm -v $(pwd)/app -w /app hysnsec/bundle-audit check --format json --output /app/bundle-audit.json
       - uses: actions/upload-artifact@v4
         name: "Upload bundler-audit artifact"
         with:
-          path: /src/bundle-audit.json
+          path: /app/bundle-audit.json
         if: always()
         continue-on-error: true
 
