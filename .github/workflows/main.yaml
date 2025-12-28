@@ -14,23 +14,16 @@ jobs:
       - run: echo "This is a build step"
 
   test:
-    runs-on: ubuntu-22.04
-    needs: build
+    runs-on: ruby-2.6.5
     steps:
       - uses: actions/checkout@v2
-
-      - run: echo "This is a test step"
-
-  integration:
-    runs-on: ubuntu-22.04
-    needs: test
-    steps:
-      - run: echo "This is an integration step"
-      - run: exit 1
+      - run: gem install --user-install bundler-audit
+      - run: export PATH="~/.gem/ruby/2.6.0/bin/:$PATH"
+      - run: bundle-audit check --format json --output bundle-audit-output.json
+      - uses: actions/artifacts@v4
+        name: "Upload bundler-audit artifact"
+        with:
+          path: bundle-audit-output.json
+        if: always()
         continue-on-error: true
 
-  prod:
-    runs-on: ubuntu-22.04
-    needs: integration
-    steps:
-      - run: echo "This is a deploy step."
